@@ -22,7 +22,7 @@ func cleanDb(t *testing.T) {
 	require.NoError(t, err)
 }
 
-func TestGetUser(t *testing.T) {
+func TestUserManagement(t *testing.T) {
 	cleanDb(t)
 
 	dtoJson := `{"email":"test@test.com", "password":"pass","username":"test"}`
