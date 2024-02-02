@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	server "commitsmart/users/generated"
 
@@ -55,17 +56,18 @@ func (UserHandler) CreateUser(ctx echo.Context) error {
 		return ctx.JSON(http.StatusInternalServerError, err)
 	}
 
-	return ctx.JSON(http.StatusCreated, user.ID)
+	return ctx.JSON(http.StatusCreated, user.ID.Hex())
 }
 
 func (UserHandler) DeleteUser(ctx echo.Context, id string) error {
+	id = sanitizeIdString(id)
 	_id, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		log.Default().Printf("failed to parse id %s: %s", id, err)
 	}
 
 	//TODO no error but still not deletes
-	_, err = mgm.Coll(&User{}).DeleteOne(context.TODO(), bson.M{"id": _id.String()})
+	_, err = mgm.Coll(&User{}).DeleteOne(context.TODO(), bson.M{"_id": _id.String()})
 	if err != nil {
 		log.Default().Printf("failed to delete user %s: %s", id, err.Error())
 		return ctx.JSON(http.StatusInternalServerError, err)
@@ -75,8 +77,14 @@ func (UserHandler) DeleteUser(ctx echo.Context, id string) error {
 }
 
 func (UserHandler) GetUser(ctx echo.Context, id string) error {
+	id = sanitizeIdString(id)
 	user := &User{}
-	if err := mgm.Coll(&User{}).FindByID(id, user); err != nil {
+	_id, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		log.Default().Printf("failed to parse id %s: %s", id, err.Error())
+		return ctx.JSON(http.StatusInternalServerError, err)
+	}
+	if err := mgm.Coll(&User{}).FindByID(_id, user); err != nil {
 		log.Default().Printf("failed to get user %s: %s", id, err.Error())
 		return ctx.JSON(http.StatusInternalServerError, err)
 	}
@@ -100,4 +108,10 @@ func modelToDto(u User) server.User {
 		Username: u.Username,
 		Password: u.Password,
 	}
+}
+
+func sanitizeIdString(id string) string {
+	id = strings.TrimSpace(id)
+	id = strings.Trim(id, "\"")
+	return id
 }
