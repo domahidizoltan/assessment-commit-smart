@@ -53,7 +53,7 @@ paths:
           description: 'The ID of the user'
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: successful operation
@@ -74,7 +74,7 @@ paths:
           description: 'The ID of the user'
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         description: Update an existent user in the store
         content:
@@ -99,7 +99,7 @@ paths:
           description: 'The ID of the user'
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '204':
           description: successful operation
@@ -111,9 +111,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          example: 10
+          type: string
         username:
           type: string
           example: theUser
