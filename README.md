@@ -1,4 +1,48 @@
-# commitsmart-backend-assignment
+# CommIT Smart Back-end Assignment
+
+author: Zoltán Domahidi  
+date: February 2, 2024  
+
+<br/>
+
+Spend a maximum of 3 hours on this assignment.
+
+---
+
+## Assignment
+
+1. Create an application that connects to a MongoDB database and performs CRUD (Create, Read, Update, and Delete) operations on a collection.
+1. Implement a concurrency mechanism that allows the application to handle a large number of concurrent requests.
+1. Implement a custom business logic that involves data encryption and decryption for sensitive fields in the collection.
+1. Use an Object-Document Mapping (ODM) framework (e.g. Mongoose) to handle the database operations.
+1. Create a REST API for the application.
+1. Add unit tests to test the main parts of the application.
+1. Use Git for version control and GitHub for code sharing.
+1. Create a detailed document that explains the architecture of the application, the technologies used, and the reasoning behind the design decisions made, especially the encryption and decryption mechanism.
+1. Create a Dockerfile to containerize the application, and a docker-compose.yml file that sets up the application and the MongoDB database.
+
+---
+
+## Evaluation Criteria
+
+1. The application should be functional and correctly perform CRUD operations on the database.
+1. Proper use the selected technologies (MongoDB, ODM, REST API)
+1. Proper multi-threading mechanism.
+1. Proper use of encryption and decryption mechanism for sensitive data.
+1. Proper error handling.
+1. Proper use of Git and GitHub for version control.
+1. Clear and well-written documentation.
+1. Proper code formatting and commenting.
+1. The ability to explain the design decisions made during the development process, especially the encryption and decryption mechanism.
+1. Proper use of Docker and Docker-compose for containerization and testing.
+
+<br/>
+
+---
+
+<br/>
+
+*Comments on my solution*
 
 Here I try to give some context about my solution to the CommIT Smart backend assignment described here https://github.com/commitsmart/career/tree/main/backend  
 
